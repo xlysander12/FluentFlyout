@@ -9,8 +9,8 @@
     <system:String x:Key="BackgroundBlurOption2" xml:space="preserve"> .النمط 1 (شكل متوهج)</system:String>
     <system:String x:Key="BackgroundBlurOption3" xml:space="preserve"> .النمط 2 (توهج متصاعد)</system:String>
     <system:String x:Key="BackgroundBlurOption4" xml:space="preserve"> . النمط 3 (ضبابي)</system:String>
-    <system:String x:Key="AcrylicWindowTitle">نافذة أكريليك</system:String>
-    <system:String x:Key="AcrylicWindowDescription">قم بتطبيق تأثير تمويه الأكريليك الشفاف على القائمة المنبثقة (إيقافه يعيده إلى مايكا)</system:String>
+    <system:String x:Key="AcrylicWindowTitle">تمويه أكريليك</system:String>
+    <system:String x:Key="AcrylicWindowDescription">قم بتطبيق تأثير تمويه الأكريليك الشفاف على القوائم المنبثقة</system:String>
     <system:String x:Key="CompactLayoutTitle">شكل مصغر</system:String>
     <system:String x:Key="CompactLayoutDescription" xml:space="preserve">تصميم أنحف وأقل إزدحام
 يخفي أزرار التكرار والعشوائية ومعلومات المشغل</system:String>
@@ -279,4 +279,12 @@
     <system:String x:Key="OnboardingStepsCounter">خطوة {0} من {1}</system:String>
     <system:String x:Key="AnonymousUsageDataTitle">ارسل معلومات استعمالك كمجهول</system:String>
     <system:String x:Key="AnonymousUsageDataDescription">ساعد بتحسين التطبيق عبر ارسال كمجهول, معلومات استعمال غير شخصية</system:String>
+    <system:String x:Key="TaskbarVisualizerBaselineAutoHideDescription">إخفاء خط الأساس تلقائيًا عند عدم وجود صوت</system:String>
+    <system:String x:Key="TaskbarWidgetScrollingTextTitle">نص متحرك</system:String>
+    <system:String x:Key="TaskbarWidgetScrollingTitle">تفعيل التحريك</system:String>
+    <system:String x:Key="TaskbarWidgetScrollingTextDescription">تمرير تلقائي للنصوص الطويلة التي لا تتسع</system:String>
+    <system:String x:Key="TaskbarWidgetScrollingTextLoopForeverTitle">تمرير متواصل</system:String>
+    <system:String x:Key="TaskbarWidgetScrollingTextLoopForeverDescription">قم بتمرير النص متواصلاً في اتجاه واحد بدلاً من التمرير ذهابًا وإيابًا.</system:String>
+    <system:String x:Key="TaskbarWidgetScrollingTextSpeedTitle">سرعة التمرير</system:String>
+    <system:String x:Key="TaskbarWidgetScrollingTextSpeedDescription">سرعة تمرير النصوص (بكسل/ثانية). الإفتراضي هو 20.</system:String>
 </ResourceDictionary>
