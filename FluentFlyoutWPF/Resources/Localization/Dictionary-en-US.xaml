@@ -179,8 +179,8 @@ Note: As an open-source project, these features are also available for free via 
     <System:String x:Key="EasingQuadratic" xml:space="preserve"> Quadratic</System:String>
     <System:String x:Key="EasingCubic" xml:space="preserve"> Cubic</System:String>
     <System:String x:Key="NativeExperienceInfo">For the native Windows 11 experience, the settings should be kept at default.</System:String>
-    <System:String x:Key="DisableOnFullscreenTitle">Disable Flyouts if DirectX fullscreen program is detected</System:String>
-    <System:String x:Key="DisableOnFullscreenDescription">Prevents DirectX games in exclusive fullscreen from minimizing if a flyout pops up</System:String>
+    <System:String x:Key="DisableOnFullscreenTitle">Disable Flyouts if an Exclusive or Borderless Fullscreen program is detected</System:String>
+    <System:String x:Key="DisableOnFullscreenDescription">Prevents games or programs running in Exclusive or Borderless FullScreen from being minimized or having their performance affected from flyout pop ups</System:String>
     <System:String x:Key="AcrylicBlurOpacityTitle">Acrylic Blur Opacity</System:String>
     <System:String x:Key="AcrylicBlurOpacityDescription">Adjust the see-through effect on Acrylic flyouts (default: 175)</System:String>
     <System:String x:Key="HomeUpdateDescription">Learn what's new</System:String>
