@@ -265,7 +265,7 @@ public partial class UserSettings : ObservableObject
     /// </summary>
     [ObservableProperty]
     public partial bool AllowOtherMonitors { get; set; }
-    
+
     /// <summary>
     /// Use bold symbol and font in the lock keys flyout
     /// </summary>

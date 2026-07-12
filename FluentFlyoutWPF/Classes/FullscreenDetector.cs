@@ -26,7 +26,7 @@ internal static class FullscreenDetector
             int result = SHQueryUserNotificationState(out state);
 
             Logger.Debug(state);
-            
+
             if (result != 0) // 0 means SUCCESS
             {
                 throw new Exception($"SHQueryUserNotificationState failed with error code: {result}");
@@ -52,10 +52,10 @@ internal static class FullscreenDetector
     {
         // Get the current foreground window
         IntPtr hwnd = GetForegroundWindow();
-        
+
         // If there's none, disregard this check
         if (hwnd == IntPtr.Zero) return false;
-        
+
         if (IsIconic(hwnd)) return false; // If the window is minimized, disregard this check
 
         // Get window corners
@@ -64,13 +64,13 @@ internal static class FullscreenDetector
             Logger.Error($"Failed to get window rectangle for hwnd: {hwnd}");
             return false;
         }
-        
+
         // Get the monitor the window is in
         MonitorUtil.MonitorInfo monitorInfo = MonitorUtil.GetMonitor(hwnd);
-        
+
         // If the flyout isn't going to be shown on the same monitor as the application is running and the setting to allow this is enabled, disregard this check
         if (SettingsManager.Current.AllowOtherMonitors && !flytoutMonitor.deviceId.Equals(monitorInfo.deviceId)) return false;
-        
+
         // Check if the foreground window's borders are in the same positions as the borders of the monitor (A.K.A, is in borderless fullscreen)
         return windowRect.Left == (int)monitorInfo.monitorArea.Left &&
                windowRect.Top == (int)monitorInfo.monitorArea.Top &&
@@ -89,14 +89,14 @@ internal static class FullscreenDetector
     {
         // If the setting isn't on, don't even try check of open apps
         if (!SettingsManager.Current.DisableIfFullscreen) return false;
-        
+
         bool directX = IsDirectXApplicationRunning();
         bool borderless = IsBorderlessFullscreenApplicationRunning(flyoutMonitor);
-        
+
 #if DEBUG
         Logger.Debug($"DirectX Fullscreen: {directX}, Borderless Fullscreen: {borderless}, DisableIfFullscreen Setting: {SettingsManager.Current.DisableIfFullscreen}");
 #endif
-        
+
         return directX || borderless;
     }
 }
