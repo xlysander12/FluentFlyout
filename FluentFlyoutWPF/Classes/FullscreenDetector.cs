@@ -87,6 +87,9 @@ internal static class FullscreenDetector
     /// </returns>
     public static bool IsFullscreenApplicationRunning(MonitorUtil.MonitorInfo flyoutMonitor)
     {
+        // If the setting isn't on, don't even try check of open apps
+        if (!SettingsManager.Current.DisableIfFullscreen) return false;
+        
         bool directX = IsDirectXApplicationRunning();
         bool borderless = IsBorderlessFullscreenApplicationRunning(flyoutMonitor);
         
@@ -94,6 +97,6 @@ internal static class FullscreenDetector
         Logger.Debug($"DirectX Fullscreen: {directX}, Borderless Fullscreen: {borderless}, DisableIfFullscreen Setting: {SettingsManager.Current.DisableIfFullscreen}");
 #endif
         
-        return SettingsManager.Current.DisableIfFullscreen && (directX || borderless);
+        return directX || borderless;
     }
 }
