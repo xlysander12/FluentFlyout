@@ -95,7 +95,9 @@ internal static class FullscreenDetector
         bool directX = IsDirectXApplicationRunning();
         bool borderless = IsBorderlessFullscreenApplicationRunning();
         
+#if DEBUG
         Logger.Debug($"DirectX Fullscreen: {directX}, Borderless Fullscreen: {borderless}, DisableIfFullscreen Setting: {SettingsManager.Current.DisableIfFullscreen}");
+#endif
         
         return SettingsManager.Current.DisableIfFullscreen && (directX || borderless);
     }
