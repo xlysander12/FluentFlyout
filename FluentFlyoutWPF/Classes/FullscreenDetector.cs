@@ -68,8 +68,8 @@ internal static class FullscreenDetector
         // Get the monitor the window is in
         MonitorUtil.MonitorInfo monitorInfo = MonitorUtil.GetMonitor(hwnd);
         
-        // If the flyout isn't going to be shown on the same monitor as the application is running, disregard this check
-        if (!flytoutMonitor.deviceId.Equals(monitorInfo.deviceId)) return false;
+        // If the flyout isn't going to be shown on the same monitor as the application is running and the setting to allow this is enabled, disregard this check
+        if (SettingsManager.Current.AllowOtherMonitors && !flytoutMonitor.deviceId.Equals(monitorInfo.deviceId)) return false;
         
         // Check if the foreground window's borders are in the same positions as the borders of the monitor (A.K.A, is in borderless fullscreen)
         return windowRect.Left == (int)monitorInfo.monitorArea.Left &&
