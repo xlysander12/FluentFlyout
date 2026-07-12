@@ -2,13 +2,12 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 using FluentFlyout.Classes.Settings;
-using MicaWPF.Core.Interop;
 using System.Runtime.InteropServices;
 using static FluentFlyout.Classes.NativeMethods;
 
 namespace FluentFlyoutWPF.Classes;
 
-internal class FullscreenDetector
+internal static class FullscreenDetector
 {
     private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
