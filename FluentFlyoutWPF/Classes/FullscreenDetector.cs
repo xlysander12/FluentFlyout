@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 using FluentFlyout.Classes.Settings;
-using System.Runtime.InteropServices;
+using FluentFlyoutWPF.Classes.Utils;
 using static FluentFlyout.Classes.NativeMethods;
 
 namespace FluentFlyoutWPF.Classes;
@@ -48,7 +48,7 @@ internal static class FullscreenDetector
     /// true if a borderless fullscreen application is running;
     /// false if no borderless fullscreen application is detected or if the check fails
     /// </returns>
-    private static bool IsBorderlessFullscreenApplicationRunning()
+    private static bool IsBorderlessFullscreenApplicationRunning(MonitorUtil.MonitorInfo flytoutMonitor)
     {
         // Get the current foreground window
         IntPtr hwnd = GetForegroundWindow();
@@ -66,21 +66,16 @@ internal static class FullscreenDetector
         }
         
         // Get the monitor the window is in
-        IntPtr monitor = MonitorFromWindow(hwnd, MONITOR_DEFAULTTONEAREST);
-
-        // Get the information of this monitor
-        MONITORINFOEX monitorInfo = new() { cbSize = Marshal.SizeOf<MONITORINFOEX>() };
-        if (!GetMonitorInfo(monitor, ref monitorInfo))
-        {
-            Logger.Error($"Failed to get monitor info for monitor: {monitor}");
-            return false;
-        }
+        MonitorUtil.MonitorInfo monitorInfo = MonitorUtil.GetMonitor(hwnd);
+        
+        // If the flyout isn't going to be shown on the same monitor as the application is running, disregard this check
+        if (!flytoutMonitor.deviceId.Equals(monitorInfo.deviceId)) return false;
         
         // Check if the foreground window's borders are in the same positions as the borders of the monitor (A.K.A, is in borderless fullscreen)
-        return windowRect.Left == monitorInfo.rcMonitor.Left &&
-               windowRect.Top == monitorInfo.rcMonitor.Top &&
-               windowRect.Right == monitorInfo.rcMonitor.Right &&
-               windowRect.Bottom == monitorInfo.rcMonitor.Bottom;
+        return windowRect.Left == (int)monitorInfo.monitorArea.Left &&
+               windowRect.Top == (int)monitorInfo.monitorArea.Top &&
+               windowRect.Right == (int)monitorInfo.monitorArea.Right &&
+               windowRect.Bottom == (int)monitorInfo.monitorArea.Bottom;
     }
 
     /// <summary>
@@ -90,10 +85,10 @@ internal static class FullscreenDetector
     /// true if an exclusive or borderless fullscreen application is running;
     /// false if no exclusive or borderless fullscreen application is detected, DisableIfFullscreen setting is false, or if any of the previous checks fail
     /// </returns>
-    public static bool IsFullscreenApplicationRunning()
+    public static bool IsFullscreenApplicationRunning(MonitorUtil.MonitorInfo flyoutMonitor)
     {
         bool directX = IsDirectXApplicationRunning();
-        bool borderless = IsBorderlessFullscreenApplicationRunning();
+        bool borderless = IsBorderlessFullscreenApplicationRunning(flyoutMonitor);
         
 #if DEBUG
         Logger.Debug($"DirectX Fullscreen: {directX}, Borderless Fullscreen: {borderless}, DisableIfFullscreen Setting: {SettingsManager.Current.DisableIfFullscreen}");
